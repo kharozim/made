@@ -1,4 +1,4 @@
 # made
 submission
 
-[![kharozim](https://circleci.com/gh/kharozim/made.svg?style=svg)](https://circleci.com/gh/kharozim/made)
+[![ci](https://circleci.com/gh/kharozim/made.svg?style=svg&branch=submission-2)](https://circleci.com/gh/kharozim/made)
