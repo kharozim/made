@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Made</string>
+    <string name="title_favorite">Module Title</string>
+    <string name="floating_favorite">floating favorite</string>
+    <string name="image_logo">image logo</string>
+    <string name="favorite">Favorite</string>
+    <string name="other">Other</string>
+    <string name="language">Language</string>
+    <string name="symbol_colon">:</string>
+    <string name="en">En</string>
+    <string name="popularity">Popularity</string>
+    <string name="_198_239">128.000</string>
+    <string name="description">Description</string>
+    <string name="home">Home</string>
+    <string name="empty">Empty</string>
+</resources>

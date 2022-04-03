@@ -1,0 +1,25 @@
+plugins {
+    id 'com.android.dynamic-feature'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+android {
+
+    defaultConfig {
+        minSdk 23
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+apply from: "../shared_android.gradle"
+apply from: "../shared_library.gradle"
+
+
+dependencies {
+    implementation project(":app")
+    implementation project(":core")
+
+}

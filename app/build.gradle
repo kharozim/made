@@ -1,0 +1,36 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+}
+
+
+android {
+
+    defaultConfig {
+        applicationId "com.ozimos.made"
+        minSdk 23
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+
+    buildFeatures {
+        viewBinding true
+    }
+    dynamicFeatures = [':favorite']
+}
+
+apply from: "../shared_android.gradle"
+apply from: "../shared_library.gradle"
+
+dependencies {
+    implementation project(":core")
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+}

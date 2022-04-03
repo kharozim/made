@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="url_poster">https://image.tmdb.org/t/p/w500%s</string>
+</resources>
