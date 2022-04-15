@@ -1,6 +1,7 @@
 package com.ozimos.core.data.remote.network
 
 import com.ozimos.core.BuildConfig
+import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
@@ -9,6 +10,13 @@ import java.util.concurrent.TimeUnit
 object OkHttpClientt {
 
     fun getOkhttp(): OkHttpClient {
+
+        val hostName = "api.themoviedb.org"
+        val certificatePinner = CertificatePinner.Builder()
+            .add(hostName, "sha256/oD/WAoRPvbez1Y2dfYfuo4yujAcYHXdv1Ivb2v2MOKk=")
+            .build()
+
+
         val okHttpClientBuilder = OkHttpClient.Builder()
         if (!BuildConfig.IS_RELEASE) {
             val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
@@ -29,6 +37,7 @@ object OkHttpClientt {
                 .build()
             chain.proceed(request)
         }
+        okHttpClientBuilder.certificatePinner(certificatePinner)
         return okHttpClientBuilder.build()
     }
 
