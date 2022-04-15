@@ -22,7 +22,7 @@ object OkHttpClientt {
         okHttpClientBuilder.addInterceptor { chain ->
             val mOriRequest: Request = chain.request()
             val request: Request = mOriRequest.newBuilder()
-                .addHeader("Authorization", "Bearer ${token}")
+                .addHeader("Authorization", "Bearer $token")
                 .addHeader("Accept", "application/json")
                 .addHeader("Content-Type", "application/json")
                 .method(mOriRequest.method, mOriRequest.body)

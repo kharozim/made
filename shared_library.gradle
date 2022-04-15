@@ -35,11 +35,11 @@ dependencies {
     //Glide
     def glideVersion = "4.13.1"
     implementation "com.github.bumptech.glide:glide:$glideVersion"
-    implementation "com.github.bumptech.glide:compiler:$glideVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
 
     def lottie = "4.2.2"
     implementation "com.airbnb.android:lottie:$lottie"
 
-
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
 
 }
