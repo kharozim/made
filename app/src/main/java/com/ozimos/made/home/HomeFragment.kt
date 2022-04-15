@@ -2,7 +2,6 @@ package com.ozimos.made.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,6 +40,8 @@ class HomeFragment : Fragment() {
         }
     }
 
+
+
     private fun doFilter(keyWord: String) {
         val tempSize = filtered.size
         filtered.clear()
@@ -51,7 +52,6 @@ class HomeFragment : Fragment() {
 
 
     }
-
     private fun setView() {
         binding.run {
             adapter.onClick(object : MovieAdapter.OnClickItem {
@@ -80,11 +80,9 @@ class HomeFragment : Fragment() {
 
         }
     }
-
     private fun setObserver() {
         listMovieObserver()
     }
-
     private fun listMovieObserver() {
         viewmodel.list.observe(viewLifecycleOwner) {
             when (it) {
@@ -93,12 +91,11 @@ class HomeFragment : Fragment() {
                     setData(it.data)
                 }
                 is Resourse.Error -> {
-                    binding.root.let { it1 -> showSnackBar(it1, it.msg ?: "error") }
+                    showSnackBar(binding.root, it.msg ?: "error")
                 }
             }
         }
     }
-
     private fun setData(data: List<MovieDomain>?) {
         binding.rvMovie.isVisible = !data.isNullOrEmpty()
         binding.layoutEmpty.isVisible = data.isNullOrEmpty()
@@ -108,10 +105,8 @@ class HomeFragment : Fragment() {
         doFilter("")
     }
 
-
     override fun onDestroyView() {
-        super.onDestroyView()
         _binding = null
+        super.onDestroyView()
     }
-
 }
