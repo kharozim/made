@@ -41,6 +41,8 @@ class HomeFragment : Fragment() {
         }
     }
 
+
+
     private fun doFilter(keyWord: String) {
         val tempSize = filtered.size
         filtered.clear()
@@ -51,7 +53,6 @@ class HomeFragment : Fragment() {
 
 
     }
-
     private fun setView() {
         binding.run {
             adapter.onClick(object : MovieAdapter.OnClickItem {
@@ -80,11 +81,9 @@ class HomeFragment : Fragment() {
 
         }
     }
-
     private fun setObserver() {
         listMovieObserver()
     }
-
     private fun listMovieObserver() {
         viewmodel.list.observe(viewLifecycleOwner) {
             when (it) {
@@ -98,7 +97,6 @@ class HomeFragment : Fragment() {
             }
         }
     }
-
     private fun setData(data: List<MovieDomain>?) {
         binding.rvMovie.isVisible = !data.isNullOrEmpty()
         binding.layoutEmpty.isVisible = data.isNullOrEmpty()
@@ -108,10 +106,8 @@ class HomeFragment : Fragment() {
         doFilter("")
     }
 
-
     override fun onDestroyView() {
-        super.onDestroyView()
         _binding = null
+        super.onDestroyView()
     }
-
 }

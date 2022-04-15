@@ -18,9 +18,13 @@ android {
     buildTypes{
         release{
             buildConfigField "boolean", "IS_RELEASE", "true"
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug{
             buildConfigField "boolean", "IS_RELEASE", "false"
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
@@ -32,5 +36,5 @@ apply from: "../shared_library.gradle"
 dependencies {
 
     implementation "net.zetetic:android-database-sqlcipher:4.4.0"
-    implementation "androidx.sqlite:sqlite-ktx:2.1.0"
+    implementation "androidx.sqlite:sqlite-ktx:2.2.0"
 }

@@ -15,12 +15,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navHost =
-            supportFragmentManager.findFragmentById(R.id.main_nav_host) as DynamicNavHostFragment
+        val navHost = supportFragmentManager.findFragmentById(R.id.main_nav_host) as DynamicNavHostFragment
         val navController = navHost.navController
         binding.mainBottomNav.setupWithNavController(navController)
 
     }
 
+    override fun onBackPressed() {
+        finishAfterTransition()
+    }
 
 }

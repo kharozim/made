@@ -55,6 +55,7 @@ class FavoriteFragment : Fragment() {
                 }
             })
             rvMovie.adapter = adapter
+            rvMovie.setHasFixedSize(true)
         }
     }
 
@@ -82,8 +83,8 @@ class FavoriteFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         _binding = null
+        super.onDestroyView()
     }
 
 }
