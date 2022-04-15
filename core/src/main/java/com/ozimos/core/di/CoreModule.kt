@@ -9,6 +9,8 @@ import com.ozimos.core.data.remote.network.OkHttpClientt
 import com.ozimos.core.data.remote.network.RetrofitClient
 import com.ozimos.core.data.remote.service.MovieService
 import com.ozimos.core.domain.repository.MovieRepo
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
@@ -18,10 +20,16 @@ import retrofit2.Retrofit
 val databaseModule = module {
     factory { get<MovieDb>().movieDao() }
     single {
+        val passphrase: ByteArray = SQLiteDatabase.getBytes("ozimos".toCharArray())
+        val factory = SupportFactory(passphrase)
+
         Room.databaseBuilder(
             androidContext(),
-            MovieDb::class.java, "movie_db"
-        ).fallbackToDestructiveMigration().build()
+            MovieDb::class.java, "movie_db.db"
+        ).fallbackToDestructiveMigration()
+            .openHelperFactory(factory)
+            .build()
+
     }
 }
 
