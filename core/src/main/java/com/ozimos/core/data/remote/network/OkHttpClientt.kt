@@ -16,7 +16,6 @@ object OkHttpClientt {
             .add(hostName, "sha256/oD/WAoRPvbez1Y2dfYfuo4yujAcYHXdv1Ivb2v2MOKk=")
             .build()
 
-
         val okHttpClientBuilder = OkHttpClient.Builder()
         if (!BuildConfig.IS_RELEASE) {
             val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
