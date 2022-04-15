@@ -2,6 +2,7 @@ package com.ozimos.made.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,23 +18,27 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
 
-    private lateinit var binding: FragmentHomeBinding
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
     private val viewmodel: HomeViewModel by viewModel()
-    private val adapter by lazy { MovieAdapter(filtered) }
-    private val listMovie = ArrayList<MovieDomain>()
     private val filtered = ArrayList<MovieDomain>()
+    private val listMovie = ArrayList<MovieDomain>()
+    private val adapter = MovieAdapter(filtered)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
-
-        setObserver()
-        setView()
-
-
+        _binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if (activity != null) {
+            setObserver()
+            setView()
+        }
     }
 
     private fun doFilter(keyWord: String) {
@@ -60,6 +65,7 @@ class HomeFragment : Fragment() {
                 }
             })
             rvMovie.adapter = adapter
+            rvMovie.setHasFixedSize(true)
             edtFilter.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(p0: String?): Boolean {
                     return true
@@ -87,7 +93,7 @@ class HomeFragment : Fragment() {
                     setData(it.data)
                 }
                 is Resourse.Error -> {
-                    showSnackBar(binding.root, it.msg ?: "error")
+                    binding.root.let { it1 -> showSnackBar(it1, it.msg ?: "error") }
                 }
             }
         }
@@ -102,5 +108,10 @@ class HomeFragment : Fragment() {
         doFilter("")
     }
 
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }

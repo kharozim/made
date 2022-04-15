@@ -18,7 +18,8 @@ import org.koin.core.context.GlobalContext.loadKoinModules
 
 class FavoriteFragment : Fragment() {
 
-    private lateinit var binding: FragmentFavoriteBinding
+    private var _binding: FragmentFavoriteBinding? = null
+    private val binding get() = _binding!!
     private val viewModel: FavoriteViewModel by viewModel()
     private val adapter by lazy { MovieAdapter(listMovie) }
     private val listMovie = ArrayList<MovieDomain>()
@@ -27,13 +28,18 @@ class FavoriteFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentFavoriteBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentFavoriteBinding.inflate(layoutInflater, container, false)
 
         loadKoinModules(favoriteModule)
-
-        setObserver()
-        setView()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if (activity != null){
+            setObserver()
+            setView()
+        }
     }
 
     private fun setView() {
@@ -73,6 +79,11 @@ class FavoriteFragment : Fragment() {
         listMovie.addAll(data ?: emptyList())
         adapter.notifyItemRangeInserted(0, listMovie.size)
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
