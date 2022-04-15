@@ -37,10 +37,12 @@ class HomeFragment : Fragment() {
     }
 
     private fun doFilter(keyWord: String) {
+        val tempSize = filtered.size
         filtered.clear()
+        adapter.notifyItemRangeRemoved(0, tempSize)
         val data = listMovie.filter { it.name.contains(keyWord, true) }
         filtered.addAll(data)
-        adapter.notifyDataSetChanged()
+        adapter.notifyItemRangeInserted(0, filtered.size)
 
 
     }

@@ -1,7 +1,6 @@
 package com.ozimos.core.domain.models
 
 import android.os.Parcelable
-import com.ozimos.core.data.local.entities.MovieEntity
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

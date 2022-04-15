@@ -19,7 +19,7 @@ import org.koin.core.context.GlobalContext.loadKoinModules
 class FavoriteFragment : Fragment() {
 
     private lateinit var binding: FragmentFavoriteBinding
-    private val viewmodel: FavoriteViewModel by viewModel()
+    private val viewModel: FavoriteViewModel by viewModel()
     private val adapter by lazy { MovieAdapter(listMovie) }
     private val listMovie = ArrayList<MovieDomain>()
 
@@ -57,7 +57,7 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun listMovieObserver() {
-        viewmodel.list.observe(viewLifecycleOwner) {
+        viewModel.list.observe(viewLifecycleOwner) {
 
             setData(it)
         }
@@ -67,9 +67,12 @@ class FavoriteFragment : Fragment() {
         binding.rvMovie.isVisible = !data.isNullOrEmpty()
         binding.layoutEmpty.isVisible = data.isNullOrEmpty()
 
+        val tempSize = listMovie.size
         listMovie.clear()
+        adapter.notifyItemRangeRemoved(0, tempSize)
         listMovie.addAll(data ?: emptyList())
-        adapter.notifyDataSetChanged()
+        adapter.notifyItemRangeInserted(0, listMovie.size)
+
     }
 
 }
